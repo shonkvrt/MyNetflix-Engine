@@ -18,12 +18,16 @@ public class RecommendationService {
 
     /** calculate how close the input user weights to a movie and returns result
         between 0-1 (the closer to 1 the similar the movie is) **/
-    public double calculateSimilarity(double [] userWeights,Movie movie){
+    public double calculateSimilarity(double [] userWeights,double [] movieWeights){
+        if(userWeights == null || movieWeights == null ||
+                userWeights.length != movieWeights.length || userWeights.length == 0){
+            throw new IllegalArgumentException("Arrays length must be equals and not null or 0");
+        }
         double result = 0, norm1 = 0, norm2 = 0;
         for (int i = 0; i < weights.length; i++) {
             norm1 += pow(userWeights[i],2 ) * weights[i];
-            norm2 += pow(movie.getWeights()[i],2 ) * weights[i];
-            result += userWeights[i] * movie.getWeights()[i] * weights[i];
+            norm2 += pow(movieWeights[i],2 ) * weights[i];
+            result += userWeights[i] * movieWeights[i] * weights[i];
         }
         norm1 = sqrt(norm1);
         norm2 = sqrt(norm2);
@@ -44,7 +48,7 @@ public class RecommendationService {
             if(movies.get(i).getName().equals(userMovie)){
                 continue;
             }
-            double result = calculateSimilarity(userWeights,movies.get(i));
+            double result = calculateSimilarity(userWeights,movies.get(i).getWeights());
             moviesScore.add(new MovieScore(movies.get(i),result));
         }
         moviesScore.sort((a,b) -> Double.compare(b.result,a.result));
