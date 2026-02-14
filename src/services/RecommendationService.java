@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Recommendation {
+public class RecommendationService {
     private ArrayList<Movie> movies;
     private double [] weights;
 
-    public Recommendation(ArrayList<Movie> movies, double [] weights){
+    public RecommendationService(ArrayList<Movie> movies, double [] weights){
         this.movies = movies;
         this.weights = weights;
     }
@@ -38,7 +38,7 @@ public class Recommendation {
 
     /** calculate to each movie how close it is to the user input,
         and takes the three closest ones and return them **/
-    public Movie [] getRecommendation(double [] userWeights,String userMovie){
+    public Movie [] getRecommendation(String userMovie, double [] userWeights){
         ArrayList<MovieScore> moviesScore = new ArrayList<>();
         for (int i = 0; i < movies.size(); i++) {
             if(movies.get(i).getName().equals(userMovie)){

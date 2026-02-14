@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CSVReader {
     private String filePath;
-    private List<Movie> movies = new ArrayList<>();
+    private ArrayList<Movie> movies = new ArrayList<>();
     private String [] genres;
     private double [] generalWeights;
 
@@ -71,7 +71,7 @@ public class CSVReader {
         return filePath;
     }
 
-    public List<Movie> getMovies() {
+    public ArrayList<Movie> getMovies() {
         return movies;
     }
 
